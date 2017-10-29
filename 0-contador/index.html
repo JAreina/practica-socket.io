@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Contador de conexiones SOCKET.IO</title>
+</head>
+<body>
+	<h1>comunicación bidireccional</h1>
+        <p id="hello"></p>
+        <p>NÚMERO DE CONEXIONES: <b id="conexiones"></b> </p>
+
+<script src="./socket.io/socket.io.js"></script>
+<script>
+	(function (d,io) {
+		/* body... */
+		'use strict';
+		var io = io();
+		io.on('hola',function(data){
+                                   console.log(data);
+                                   d.querySelector('#hello').innerHTML = data.message;
+                                   io.emit("MENSAJE DESDE CLIENTE",{
+                                   	nombre: "JAreina",
+                                   	web:"http://jareina.github.io/jareina"
+                                   })
+		})
+		io.on('numero usuarios',function(data){
+			d.querySelector('#conexiones').innerHTML= data.numeros;
+		})
+	})(document,io);
+</script>
+
+</body>
+</html>
